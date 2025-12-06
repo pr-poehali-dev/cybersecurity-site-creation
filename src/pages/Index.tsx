@@ -9,6 +9,12 @@ const Index = () => {
   const [scanProgress, setScanProgress] = useState(0);
   const [isScanning, setIsScanning] = useState(false);
   const [securityScore, setSecurityScore] = useState<number | null>(null);
+  const [showTechDetails, setShowTechDetails] = useState<number | null>(null);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const startSecurityScan = () => {
     setIsScanning(true);
@@ -40,24 +46,28 @@ const Index = () => {
     {
       title: 'Файрвол нового поколения',
       description: 'Интеллектуальная защита периметра с глубокой инспекцией трафика',
+      details: 'Анализирует входящий и исходящий трафик в режиме реального времени. Блокирует вредоносные подключения и предотвращает DDoS атаки с использованием машинного обучения.',
       icon: 'Flame',
       gradient: 'from-cyan-500 to-blue-600'
     },
     {
       title: 'AI-детектор угроз',
       description: 'Машинное обучение для выявления аномалий в реальном времени',
+      details: 'Нейросеть непрерывно обучается на паттернах атак, выявляя даже неизвестные угрозы. Автоматическая реакция на инциденты за миллисекунды.',
       icon: 'Brain',
       gradient: 'from-purple-500 to-pink-600'
     },
     {
       title: 'Шифрование данных',
       description: 'Криптографическая защита по стандартам AES-256',
+      details: 'Военное шифрование для всех данных в покое и движении. Квантово-устойчивые алгоритмы защищают информацию от будущих угроз.',
       icon: 'Lock',
       gradient: 'from-pink-500 to-rose-600'
     },
     {
       title: 'Zero Trust архитектура',
       description: 'Постоянная верификация каждого запроса без доверия по умолчанию',
+      details: 'Каждое устройство и пользователь проходят многофакторную проверку перед доступом. Микросегментация сети минимизирует зону компрометации.',
       icon: 'ShieldCheck',
       gradient: 'from-blue-500 to-cyan-600'
     }
@@ -91,6 +101,7 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button 
               size="lg" 
+              onClick={() => scrollToSection('scanner')}
               className="bg-primary hover:bg-primary/90 text-white glow-border text-lg px-8 py-6 transition-all hover:scale-105"
             >
               <Icon name="Rocket" size={24} className="mr-2" />
@@ -98,7 +109,8 @@ const Index = () => {
             </Button>
             <Button 
               size="lg" 
-              variant="outline" 
+              variant="outline"
+              onClick={() => scrollToSection('technologies')}
               className="border-primary text-primary hover:bg-primary/10 text-lg px-8 py-6 transition-all hover:scale-105"
             >
               <Icon name="Info" size={24} className="mr-2" />
@@ -209,6 +221,7 @@ const Index = () => {
               <Card 
                 key={index}
                 className="bg-card/50 backdrop-blur-xl border-primary/20 hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] glow-border group cursor-pointer"
+                onClick={() => setShowTechDetails(showTechDetails === index ? null : index)}
               >
                 <CardHeader>
                   <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${tech.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
@@ -221,6 +234,25 @@ const Index = () => {
                     {tech.description}
                   </CardDescription>
                 </CardHeader>
+                {showTechDetails === index && (
+                  <CardContent className="animate-fade-in">
+                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                      <p className="text-primary/90 leading-relaxed">{tech.details}</p>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="mt-4 text-primary hover:text-primary/80"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowTechDetails(null);
+                        }}
+                      >
+                        <Icon name="X" size={16} className="mr-2" />
+                        Закрыть
+                      </Button>
+                    </div>
+                  </CardContent>
+                )}
               </Card>
             ))}
           </div>
@@ -248,13 +280,28 @@ const Index = () => {
             <h3 className="text-3xl font-bold mb-4 text-gradient">CYBER SECURITY</h3>
             <p className="text-primary/60 mb-6">Защита нового поколения • 24/7 мониторинг • AI-технологии</p>
             <div className="flex gap-4 justify-center">
-              <Button variant="ghost" size="icon" className="text-primary hover:text-primary/80 hover:bg-primary/10">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="text-primary hover:text-primary/80 hover:bg-primary/10"
+                onClick={() => window.open('https://github.com', '_blank')}
+              >
                 <Icon name="Github" size={24} />
               </Button>
-              <Button variant="ghost" size="icon" className="text-primary hover:text-primary/80 hover:bg-primary/10">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="text-primary hover:text-primary/80 hover:bg-primary/10"
+                onClick={() => window.open('https://twitter.com', '_blank')}
+              >
                 <Icon name="Twitter" size={24} />
               </Button>
-              <Button variant="ghost" size="icon" className="text-primary hover:text-primary/80 hover:bg-primary/10">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="text-primary hover:text-primary/80 hover:bg-primary/10"
+                onClick={() => window.open('https://linkedin.com', '_blank')}
+              >
                 <Icon name="Linkedin" size={24} />
               </Button>
             </div>
