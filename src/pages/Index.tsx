@@ -278,33 +278,7 @@ const Index = () => {
         <footer className="container mx-auto px-4 py-12 border-t border-primary/20">
           <div className="text-center">
             <h3 className="text-3xl font-bold mb-4 text-gradient">CYBER SECURITY</h3>
-            <p className="text-primary/60 mb-6">Защита нового поколения • 24/7 мониторинг • AI-технологии</p>
-            <div className="flex gap-4 justify-center">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="text-primary hover:text-primary/80 hover:bg-primary/10"
-                onClick={() => window.open('https://github.com', '_blank')}
-              >
-                <Icon name="Github" size={24} />
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="text-primary hover:text-primary/80 hover:bg-primary/10"
-                onClick={() => window.open('https://twitter.com', '_blank')}
-              >
-                <Icon name="Twitter" size={24} />
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="text-primary hover:text-primary/80 hover:bg-primary/10"
-                onClick={() => window.open('https://linkedin.com', '_blank')}
-              >
-                <Icon name="Linkedin" size={24} />
-              </Button>
-            </div>
+            <p className="text-primary/60">Защита нового поколения • 24/7 мониторинг • AI-технологии</p>
           </div>
         </footer>
       </div>
